@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Filmes</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+            color: white;
+        }
+
+        header {
+            background: linear-gradient(to right, #8a0c8a, #ff004f);
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin: 20px 0;
+            color: #ffcc00;
+            text-shadow: 1px 1px 3px black;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #222;
+            color: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        li:hover {
+            background: #ff004f;
+            transform: scale(1.03);
+        }
+
+        #detalhes {
+            margin-top: 15px;
+            font-size: 15px;
+            font-style: italic;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 6px;
+            min-height: 50px;
+            transition: 0.3s;
+        }
+
+        .poster {
+            width: 40px;
+            height: 60px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .btn-comprar {
+            width: 60%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px auto 0;
+            display: block;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(to right, #8a0c8a, #ff004f);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-comprar:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: linear-gradient(to right, #8a0c8a, #ff004f);
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+            margin-top: 30px;
+            color: white;
+            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>🎥 Cine Digital</header>
+
+    <div class="container">
+        <h1>Veja os filmes em cartaz:</h1>
+
+        <ul>
+            <li onclick="carregar('quarteto')">
+                <img src="quarteto.jpg" alt="Quarteto Fantástico" class="poster">
+                Quarteto Fantástico
+            </li>
+            <li onclick="carregar('sexta')">
+                <img src="sexta.jpeg" alt="Uma Sexta Feira Mais Louca Ainda" class="poster">
+                Uma Sexta Feira Mais Louca Ainda
+            </li>
+            <li onclick="carregar('interestelar')">
+                <img src="interestelar.jpg" alt="Interestelar" class="poster">
+                Interestelar (Relançamento)
+            </li>
+            <li onclick="carregar('invocacao')">
+                <img src="invocação.jpg" alt="Invocação do Mal 4" class="poster">
+                Invocação do Mal 4: O Último Ritual
+            </li>
+            <li onclick="carregar('downtown')">
+                <img src="downtown.jpg" alt="Downton Abbey" class="poster">
+                Downton Abbey – O Grande Final
+            </li>
+            <li onclick="carregar('demon')">
+                <img src="demon.jpg" alt="Demon Slayer" class="poster">
+                Demon Slayer: Kimetsu no Yaiba
+            </li>
+            <li onclick="carregar('sogra')">
+                <img src="sogra.jpg" alt="A Sogra Perfeita 2" class="poster">
+                A Sogra Perfeita 2
+            </li>
+            <li onclick="carregar('batalha')">
+                <img src="batalha.jpg" alt="Uma Batalha Após A Outra" class="poster">
+                Uma Batalha Após A Outra
+            </li>
+        </ul>
+
+        <div id="detalhes">Clique em um filme para ver a sinopse.</div>
+
+        <button class="btn-comprar" onclick="comprarIngresso()">Comprar Ingresso</button>
+    </div>
+
+    <footer>
+        &copy; 2025 CineDigital. Todos os direitos reservados. <br><br>
+        Email: cinedigital@gmail.com <br>
+        Tel: (00) 0000-0000 <br>
+        Instagram:
+        <a href="https://www.instagram.com/">Instagram</a>
+    </footer>
+
+    <script>
+        let filmeSelecionado = null; // guarda o último filme escolhido
+
+        async function carregar(filme) {
+            filmeSelecionado = filme; // salva o filme clicado
+            document.getElementById("detalhes").innerHTML = "Carregando sinopse...";
+
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            const sinopses = {
+                quarteto: "Em Quarteto Fantástico: Primeiros Passos, a Primeira Família da Marvel — Reed, Sue, Johnny e Ben já é famosa e consolidada como heroica. Vivendo em um universo retrofuturista, eles precisam impedir que Galactus destrua a Terra, enquanto lidam com a chegada da Surfista Prateada e com desafios pessoais, como a gravidez de Sue, que torna a missão ainda mais urgente.",
+                sexta: "Anos após trocarem de corpos, Tess (Jamie Lee Curtis) e Anna (Lindsay Lohan) vivem novas fases de suas vidas — agora como avó e mãe — e se reencontram em meio a mudanças familiares. Quando um novo incidente mágico acontece, elas precisam lidar novamente com as confusões e lições de vida que surgem ao viver no corpo uma da outra.",
+                interestelar: "Em Interestelar (2014), um grupo de astronautas viaja por um buraco de minhoca em busca de um novo planeta habitável para salvar a humanidade, enquanto lida com desafios científicos, emocionais e o impacto do tempo nas relações pessoais.",
+                invocacao: "Em Invocação do Mal 4: O Último Ritual (2025), Ed e Lorraine Warren investigam, ao lado da filha Judy, o assombramento da família Smurl na Pensilvânia. Enfrentando uma das entidades mais perigosas de suas carreiras, eles encaram o que pode ser seu último e mais arriscado caso sobrenatural.",
+                downtown: "No alvorecer dos anos 1930, enquanto cada membro da família Crawley tenta fazer Downton Abbey evoluir com seu tempo, uma nova era se anuncia, cheia de desafios, questionamentos e esperanças.",
+                demon: "Em Demon Slayer: Kimetsu no Yaiba – Castelo Infinito, Tanjiro busca vingança após sua família ser morta por demônios e sua irmã Nezuko ser transformada em um oni. Ao lado de seus companheiros e dos espadachins mais poderosos, ele enfrenta uma batalha final dentro de um castelo misterioso.",
+                sogra: "Após conhecer o poder da liberdade, Neide acaba negando o inesperado pedido de casamento do seu namorado, Oliveira, por medo de perder sua independência. No entanto, o surgimento de sua sogra portuguesa com malas prontas para o casório instiga a curiosidade de toda a vizinhança e cada um deles começa a se preparar para a suposta cerimônia. Agora, Neide precisa resolver a situação sozinha enquanto dá continuidade a sua renomada carreira de cabeleireira.",
+                batalha: "Em Uma Batalha Após a Outra, o ex-revolucionário Bob Ferguson (Leonardo DiCaprio) é forçado a voltar à ação quando um antigo inimigo, Coronel Lockjaw (Sean Penn), reaparece após 16 anos para sequestrar sua filha, levando-o a reunir seus ex-companheiros para uma missão de resgate desesperada."
+            };
+
+            document.getElementById("detalhes").innerHTML = sinopses[filme] || "Sinopse não encontrada.";
+        }
+
+        function comprarIngresso() {
+            if (!filmeSelecionado) {
+                alert("Selecione um filme antes de comprar o ingresso!");
+                return;
+            }
+
+            const links = {
+                quarteto: "https://www.ingresso.com/filme/quarteto-fantastico-primeiros-passos",
+                sexta: "https://www.ingresso.com/filme/uma-sexta-feira-mais-louca-ainda",
+                interestelar: "https://www.ingresso.com/filme/interestelar-relancamento",
+                invocacao: "https://www.ingresso.com/filme/invocacao-do-mal-4-o-ultimo-ritual",
+                downtown: "https://www.ingresso.com/filme/downton-abbey-o-grande-final?city=belo-horizonte",
+                demon: "https://www.ingresso.com/filme/demon-slayer-kimetsu-no-yaiba-castelo-infinito?partnership=adw-perrengue&gad_source=1&gad_campaignid=21410870150&gbraid=0AAAAAD6mqB-lghISiEfUHdaNALGiWSVC0&gclid=EAIaIQobChMI_Z3qv5aEkAMVHWdIAB2b_iEgEAAYASAAEgKHXPD_BwE",
+                sogra: "https://www.ingresso.com/filme/a-sogra-perfeita-2?city=belo-horizonte&partnership=belohorizonte&ing_source=api&ing_medium=link-filme&ing_campaign=belohorizonte&ing_content=cacadores-do-fim-do-mundo",
+                batalha: "https://www.ingresso.com/filme/uma-batalha-apos-a-outra"
+            };
+
+
+            window.open(links[filmeSelecionado], "_blank");
+        }
+    </script>
+
+</body>
+
+</html>

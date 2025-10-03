@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI';
+            background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            background: rgba(45, 45, 45, 0.95);
+            color: white;
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 90%;
+            margin: 80px auto;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: #ffcc00;
+            text-shadow: 1px 1px 3px black;
+        }
+
+        .container p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .container input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 15px;
+            border: none;
+            border-radius: 6px;
+            background-color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 20px;
+            background: linear-gradient(to right, #8a0c8a, #ff004f);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+
+        }
+
+        footer {
+            margin-top: auto;
+            background: linear-gradient(to right, #8a0c8a, #ff004f);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 id="titulo">Cine Digital</h1>
+        <p id="mensagem">Digite seu login e senha:</p>
+        <input type="text" id="usuario" placeholder="Digite seu usuário">
+        <br><br>
+        <input type="password" id="senha" placeholder="Digite sua senha">
+        <br><br>
+        <button id="botao" onclick="Entrar()">Entrar</button>
+    </div>
+
+    <footer>
+        &copy; 2025 CineDigital. Todos os direitos reservados. <br>
+        <br>
+        Email: cinedigital@gmail.com <br>
+        Tel: (00) 0000-0000 <br>
+        Instagram:
+        <a href="https://www.instagram.com/">Instagram</a>
+    </footer>
+
+    <script>
+        function Entrar() {
+            const login = [
+                { usuario: "marcos.silva", senha: "4321" }, { usuario: "fernando.lima", senha: "ABCD" }, { usuario: "julia.andrade", senha: "2536" }, { usuario: "teste", senha: "1234" }
+            ];
+
+            const user = document.getElementById("usuario").value;
+            const senha = document.getElementById("senha").value;
+            const men = document.getElementById("mensagem");
+            const mensagemOriginal = "Digite seu login e senha:";
+            let encontrado = false;
+
+            for (let i = 0; i < login.length; i++) {
+                if (user === login[i].usuario && senha === login[i].senha) {
+                    encontrado = true;
+                    setTimeout(() => {
+                        men.innerHTML = "Redirecionando...";
+                        window.location.href = "index2.html";
+                    }, 2000);
+
+                }
+            }
+
+            if (!encontrado) {
+                setTimeout(() => {
+                    men.innerHTML = "Login ou senha incorreta! Tente novamente.";
+
+                    document.getElementById("usuario").value = "";
+                    document.getElementById("senha").value = "";
+                }, 2000);
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>
